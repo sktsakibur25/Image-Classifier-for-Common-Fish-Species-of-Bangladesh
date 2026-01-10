@@ -57,7 +57,7 @@ for i, (sci_name, local_name) in enumerate(zip(scientific_names, local_names)):
             downloader_threads=4,
             storage={'root_dir': f'images/{local_name.replace(" ", "_")}'}
         )
-        crawler.crawl(keyword=f'{sci_name} fish', max_num=100)
+        crawler.crawl(keyword=f'{sci_name} fish', max_num=1000)
         print(f"Downloaded images for {local_name}")
     except Exception as e:
         print(f"Error downloading {local_name}: {str(e)}")

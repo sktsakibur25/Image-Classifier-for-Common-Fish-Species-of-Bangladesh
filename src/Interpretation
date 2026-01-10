@@ -1,0 +1,22 @@
+from fastai import *
+from fastai.vision.all import *
+import matplotlib.pyplot as plt
+
+version = 2.0
+model_path = Path('models')
+
+if __name__ == '__main__':
+	# load the DataLoaders object saved earlier
+	dls = torch.load(f'./dataloader_v{version}.pkl', weights_only=False)
+
+	# recreate the Learner and load the saved weights
+	learn = vision_learner(dls, resnet34, metrics=[error_rate, accuracy])
+	learn.path = model_path
+	learn.load(f'model_v_{version}_resnet34')
+
+	# create interpretation and show confusion matrix
+	interp = ClassificationInterpretation.from_learner(learn)
+	interp.plot_confusion_matrix(figsize=(8,8), dpi=80)
+	plt.show()
+	interp.plot_top_losses(9, figsize=(9,9))
+	plt.show()
