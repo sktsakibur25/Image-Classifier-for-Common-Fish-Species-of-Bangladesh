@@ -19,6 +19,7 @@ dbBlock = DataBlock(
 
 print("Loading data...")
 dls = dbBlock.dataloaders(Path('images'), bs=bs)
+
 print("Data loaded successfully!")
 torch.save(dls, f'dataloader_v{version}.pkl')
 # dls = torch.load(f'dataloader_v{version}.pkl')
